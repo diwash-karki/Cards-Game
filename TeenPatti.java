@@ -6,17 +6,21 @@ public class TeenPatti {
         // welcomeScreen();
         // int choice = selectMenu(new Scanner(System.in));
         // switch (choice) {
-        //     case 1:
-        //         play();
-        //         break;
-        //     case 2:
-        //         System.out.println("Goodbye!");
-        //         break;
-        //     default:
-        //         System.out.println("Invalid choice");
-        //         break;
+        // case 1:
+        // play();
+        // break;
+        // case 2:
+        // System.out.println("Goodbye!");
+        // break;
+        // default:
+        // System.out.println("Invalid choice");
+        // break;
         // }
-        play();
+        int c = 20;
+        while (c-- > 0){
+            play();
+        }
+        
     }
 
     public static void welcomeScreen() {
@@ -49,9 +53,9 @@ public class TeenPatti {
 
         ArrayList<Player> players = new ArrayList<>();
         // for (int i = 0; i < numPlayers; i++) {
-        //     System.out.println("Enter player " + (i + 1) + "'s name:");
-        //     String name = scn.next();
-        //     players.add(new Player(name));
+        // System.out.println("Enter player " + (i + 1) + "'s name:");
+        // String name = scn.next();
+        // players.add(new Player(name));
         // }
 
         players.add(new Player("Karsang"));
@@ -64,10 +68,14 @@ public class TeenPatti {
             }
         }
         for (Player player : players) {
+            System.out.println();
             player.showHand();
         }
         Player winner = checkWinnerPlayer(players);
 
-        System.out.println("The winner is " + winner.getName() + "!");
+        System.out.println("\n\nThe winner is " + winner.getName() + " by " + winner.getWinType() + "!");
+        System.out.println("The winning hand is: \n" + winner.getHand());
+
+        System.out.println( "\n-----------------------------------------------------------------------------------\n");
     }
 }

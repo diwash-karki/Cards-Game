@@ -47,16 +47,21 @@ public class Card {
         return null;
     }
 
-    public String toString() {
-        StringBuilder cardRepresentation = new StringBuilder();
-        cardRepresentation.append("┌─────────┐\n");
-        cardRepresentation.append("│         │\n");
-        cardRepresentation.append("│         │\n");
-        cardRepresentation.append("│ ").append(color.name()).append("\n");
-        cardRepresentation.append("│   ").append(getRealNumber()).append("\n");
-        cardRepresentation.append("│         │\n");
-        cardRepresentation.append("│         │\n");
-        cardRepresentation.append("└─────────┘\n");
-        return cardRepresentation.toString();
+    // public String toString() {
+    //     StringBuilder cardRepresentation = new StringBuilder();
+    //     cardRepresentation.append("┌─────────┐\n");
+    //     cardRepresentation.append("│         │\n");
+    //     cardRepresentation.append("│         │\n");
+    //     cardRepresentation.append("│ ").append(color.name()).append("\n");
+    //     cardRepresentation.append("│   ").append(getRealNumber()).append("\n");
+    //     cardRepresentation.append("│         │\n");
+    //     cardRepresentation.append("│         │\n");
+    //     cardRepresentation.append("└─────────┘\n");
+    //     return cardRepresentation.toString();
+    // }
+
+    public String toString(){
+        String result = color.name() + " -> " + getRealNumber();
+        return result;
     }
 }
