@@ -17,10 +17,10 @@ public class TeenPatti {
         // break;
         // }
         int c = 20;
-        while (c-- > 0){
+        while (c-- > 0) {
             play();
         }
-        
+
     }
 
     public static void welcomeScreen() {
@@ -37,7 +37,8 @@ public class TeenPatti {
     }
 
     public static Player checkWinnerPlayer(ArrayList<Player> players) {
-        Player winner = players.get(0);
+        Player winner = players.remove(0);
+
         for (Player player : players) {
             if (player.compareTo(winner) > 0) {
                 winner = player;
@@ -76,6 +77,6 @@ public class TeenPatti {
         System.out.println("\n\nThe winner is " + winner.getName() + " by " + winner.getWinType() + "!");
         System.out.println("The winning hand is: \n" + winner.getHand());
 
-        System.out.println( "\n-----------------------------------------------------------------------------------\n");
+        System.out.println("\n-----------------------------------------------------------------------------------\n");
     }
 }

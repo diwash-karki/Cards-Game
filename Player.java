@@ -20,6 +20,7 @@ public class Player {
     }
 
     ArrayList<Card> getHand() {
+        Collections.sort(hand, new SortByNumber());
         return hand;
     }
 
@@ -65,19 +66,17 @@ public class Player {
         }
     }
 
-    int doubleSequence(Player opponent){
+    int doubleSequence(Player opponent) {
         int seq = this.sequence(opponent);
         int col = this.colors(opponent);
-        if(seq == 1 && col == 1){
+        if (seq == 1 && col == 1) {
             return 1;
-        }else if(seq == -1 && col == -1){
+        } else if (seq == -1 && col == -1) {
             return -1;
-        }else{
+        } else {
             return 2;
         }
     }
-
-    
 
     int sequence(Player opponent) {
         int p1Max = 0;
@@ -184,12 +183,16 @@ public class Player {
     }
 
     int highestCard(Player opponent) {
+        System.out.println("Hello" + this.hand + " " + opponent.hand + " " + this.hand.get(0).getNumber().ordinal()
+                + " " + opponent.hand.get(0).getNumber().ordinal());
         if (this.hand.get(0).getNumber().ordinal() > opponent.hand.get(0).getNumber().ordinal()) {
             return 1;
         } else if (this.hand.get(0).getNumber().ordinal() < opponent.hand.get(0).getNumber().ordinal()) {
             return -1;
         } else {
-            return 0;
+            Integer res = checkDeep(opponent);
+            System.out.println("Hello " + res);
+            return res;
         }
     }
 
@@ -200,48 +203,67 @@ public class Player {
         // // trial
         // Integer trial = this.isTrial(other);
         // if (trial != 2) {
-        //     this.setWinType(WinType.TRIAL);
-        //     return trial;
+        // this.setWinType(WinType.TRIAL);
+        // return trial;
         // }
 
         // // double sequence
         // Integer doubleSeq = this.doubleSequence(other);
         // if (doubleSeq != 2) {
-        //     this.setWinType(WinType.DOUBLE_SEQUENCE);
-        //     return doubleSeq;
+        // this.setWinType(WinType.DOUBLE_SEQUENCE);
+        // return doubleSeq;
         // }
 
         // // sequence
         // Integer seq = this.sequence(other);
         // if (seq != 2) {
-        //     this.setWinType(WinType.SEQUENCE);
-        //     return seq;
+        // this.setWinType(WinType.SEQUENCE);
+        // return seq;
         // }
 
         // // color
         // Integer color = this.colors(other);
         // if (color != 2) {
-        //     this.setWinType(WinType.COLOR);
-        //     return color;
+        // this.setWinType(WinType.COLOR);
+        // return color;
         // }
 
-        // // pair
-        // Integer pair = this.cardPair(other);
-        // if (pair != 2) {
-        //     this.setWinType(WinType.PAIR);
-        //     return pair;
-        // }
+        // pair
+        Integer pair = this.cardPair(other);
+        if (pair != 2) {
+        this.setWinType(WinType.PAIR);
+        return pair;
+        }
 
         // highest card
         Integer highest = this.highestCard(other);
+        System.out.println("Hello " + highest);
         if (highest != 0) {
-            this.setWinType(WinType.HIGH_CARD);
+            other.setWinType(WinType.HIGH_CARD);
             return highest;
         }
-
-        this.setWinType(WinType.DRAW);
-
+        other.setWinType(WinType.DRAW);
         return 0;
+    }
 
+    Integer checkDeep(Player opponent) {
+        Integer[] p1 = new Integer[hand.size()];
+        for (int i = 0; i < hand.size(); i++) {
+            p1[i] = hand.get(i).getNumber().ordinal();
+        }
+        Integer[] p2 = new Integer[opponent.hand.size()];
+        for (int i = 0; i < opponent.hand.size(); i++) {
+            p2[i] = opponent.hand.get(i).getNumber().ordinal();
+        }
+        for (int i = 0; i < p1.length; i++) {
+            if (p1[i] > p2[i]) {
+                return 1;
+            } else if (p1[i] < p2[i]) {
+                return -1;
+            } else {
+                continue;
+            }
+        }
+        return 0;
     }
 }
